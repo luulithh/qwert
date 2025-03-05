@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню с подсветкой</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            text-align: center;
+            font-size: 24px;
+            padding-bottom: 60px;
+        }
+        .menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background: #222;
+            padding: 10px 0;
+        }
+        .menu button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .menu button.active {
+            color: red;
+            font-weight: bold;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+        }
+        .calendar div {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .calendar .header {
+            font-weight: bold;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="content" id="page-content">Главная страница</div>
+    <div class="menu">
+        <button onclick="navigate('Календарь')" id="calendar">Календарь</button>
+        <button onclick="navigate('Сервисы')" id="services">Сервисы</button>
+        <button onclick="navigate('Мэйн')" id="main">Мэйн</button>
+        <button onclick="navigate('Статистика')" id="stats">Статистика</button>
+        <button onclick="navigate('Настройки')" id="settings">Настройки</button>
+    </div>
+    <script>
+        const pageData = {
+            'Календарь': '<div class="calendar" id="calendar-container"></div>',
+            'Сервисы': 'Список доступных сервисов.',
+            'Мэйн': 'Главная страница с основными новостями.',
+            'Статистика': 'Графики и аналитика по данным.',
+            'Настройки': 'Настройки вашего профиля и приложения.'
+        };
+
+        function navigate(page) {
+            document.getElementById('page-content').innerHTML = pageData[page];
+            if (page === 'Календарь') {
+                renderCalendar();
+            }
+            localStorage.setItem('activePage', page);
+            updateActiveButton(page);
+        }
+
+        function updateActiveButton(page) {
+            document.querySelectorAll('.menu button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.menu button').forEach(btn => {
+                if (btn.innerText === page) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function renderCalendar() {
+            const calendarContainer = document.getElementById('calendar-container');
+            if (!calendarContainer) return;
+
+            const daysOfWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            let calendarHTML = '';
+            daysOfWeek.forEach(day => {
+                calendarHTML += `<div class='header'>${day}</div>`;
+            });
+
+            for (let i = 0; i < (firstDay === 0 ? 6 : firstDay - 1); i++) {
+                calendarHTML += '<div></div>';
+            }
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                calendarHTML += `<div>${i}</div>`;
+            }
+
+            calendarContainer.innerHTML = calendarHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedPage = localStorage.getItem('activePage') || 'Мэйн';
+            document.getElementById('page-content').innerHTML = pageData[savedPage];
+            if (savedPage === 'Календарь') {
+                renderCalendar();
+            }
+            updateActiveButton(savedPage);
+        });
+    </script>
+</body>
+</html>

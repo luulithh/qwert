@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --body-color: #FFF;
+    --sidebar-color: #FFF;
+    --primary-color: #181818;
+    --text-color: #707070;
+    --tran-05: all 0.5s ease;
+}
+
+body {
+    height: 100vh;
+    background: var(--body-color);
+    transition: var(--tran-05);
+    user-select: none; /* Запрещает выделение текста */
+}
+
+.sidebar {
+    position: fixed;
+    bottom: 0; /* Шторка внизу */
+    left: 0;
+    height: 80px; /* Высота шторки */
+    width: 100%; /* Ширина на всю ширину экрана */
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(20, 20, 20, 0.5); /* Более сильная и темная тень */
+
+}
+
+.container {
+    display: flex; 
+    justify-content: space-around; /* Выравнивание кнопок по горизонтали */
+    align-items: center; /* Центрирование кнопок по вертикали */
+}
+
+.sidebar li {
+    list-style: none;
+    text-align: center; /* Центрирование текста под иконками */
+}
+
+.sidebar li a {
+    display: flex; 
+    flex-direction: column; /* Вертикальное выравнивание иконки и текста */
+    align-items: center; /* Центрирование элементов по горизонтали */
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.sidebar li a:hover {
+    color: #303030; /* Цвет текста при наведении */
+}
+
+.icon {
+    font-size: 24px; /* Установите желаемый размер иконок */
+    transition: transform 0.3s; /* Плавный эффект при наведении */
+    margin-top: 5px; /* Отступ сверху */
+    transform: translateY(5px); /* Дополнительное смещение вниз */
+}
+
+.text {
+    font-size: 12px; /* Размер текста */
+    margin-top: 5px;
+    transition: transform 0.3s; /* Плавный эффект для текста */
+}
+
+
+
+.search-container {
+    position: relative; /* Устанавливаем относительное позиционирование для контейнера */
+}
+
+.search-form {
+    display: absolute;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+}
+
+.search-icon {
+    position: absolute; /* Абсолютное позиционирование для иконки */
+    left: 10px; /* Расстояние от левого края */
+    top: 50%; /* Центрируем по вертикали */
+    transform: translateY(-50%); /* Центрируем по вертикали */
+    color: #888; /* Цвет иконки */
+    cursor: pointer;
+}
+
+.search-input {
+    padding-left: 30px; /* Добавляем отступ слева, чтобы текст не перекрывал иконку */
+    width: 100%; /* Занимает всю ширину родительского контейнера */
+    height: 40px; /* Высота поля ввода */
+    border: 1px solid #ffffff; /* Граница поля ввода */
+    border-radius: 15px; /* Закругленные углы */
+    background-color: #ffffff;
+    box-shadow: 0 -4px 20px rgba(20, 20, 20, 0.5);
+}
+
+.search-input:focus {
+    border-color: gray; /* Цвет границы при фокусировке */
+    outline: none; /* Убираем стандартный контур при фокусировке */
+}
+
+
+.nav-link.active {
+    color: rgb(0, 0, 0); /* Или любой другой цвет для активной кнопки */
+    transform: scale(1.2);
+    font-weight: bold;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Отключаем скролл для body */
+}
+
+main {
+    flex-grow: 1;
+    overflow-y: auto; /* Вертикальный скролл для контента */
+}
+html {
+    scroll-behavior: smooth;
+}

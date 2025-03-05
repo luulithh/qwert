@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Main</title>
+</head>
+<body>
+    <nav class="sidebar">
+        <ul class="container">
+            <li><a href=""><i class='bx bx-calendar-star icon'></i><span class="text nav-text">Calendar</span></a></li>
+            <li><a href=""><i class='bx bx-street-view icon'></i><span class="text">Services</span></a></li>
+            <li><a href=""><i class='bx bx-bar-chart-square icon'></i><span class="text">Statistics</span></a></li>
+            <li><a href=""><i class='bx bxs-cog icon'></i><span class="text">Settings</span></a></li>
+        </ul>
+    </nav>
+    <form class="search-form" action="/search" method="GET">
+        <div class="search-container">
+            <i class='bx bx-search-alt-2 search-icon' onclick="document.querySelector('.search-input').focus();"></i>
+            <input type="text" name="query" class="search-input" placeholder="Search..." required>
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>
